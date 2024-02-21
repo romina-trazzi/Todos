@@ -1,6 +1,6 @@
-function InsertButton() {
+function InsertButton({onAdd}) {
     return(
-        <button type="submit">
+        <button type="submit" onSubmit={onAdd}>
             <span>+</span>Inserisci
         </button>
     )
