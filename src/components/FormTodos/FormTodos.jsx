@@ -14,7 +14,6 @@ function FormTodos({ onTaskChange }) {
   }
 
   const handleClick = () => {
-   
     if (newTask.titolo.trim() === '' || newTask.descrizione.trim() === '') {
       alert("Assicurati di compilare tutti i campi!");
       return; 
@@ -55,16 +54,13 @@ function FormTodos({ onTaskChange }) {
         </div>
 
         {/* Submit Button */}
-        <div className={styles.submit_data }>
+        <div className={styles.submit_data}>
           <button onClick={handleClick}>
             <span><RiAddCircleLine />Inserisci</span>
           </button>
         </div>
-
-
       </div>
     </div>
-        
   );
 }
 

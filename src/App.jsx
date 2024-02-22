@@ -1,26 +1,18 @@
 import { useState } from 'react';
 import styles from './App.module.css'
-import FormTodos from './components/FormTodos.jsx';
-import TodoList from './components/TodoList.jsx';
+import FormTodos from './components/FormTodos/FormTodos.jsx';
+import TodoList from './components/TodoList/TodoList.jsx';
 
 function App() {
-  const [todoList, setTodoList] = useState([{titolo: "", descrizione: ""}]);
+  const [todoList, setTodoList] = useState([]);
   
   const handleTaskChange = (newTask) => {
-    
-    /* Update the id value of the newTask before setting the list:
-
-    1. Find the maxId value into the current todoList
-    2. Update the id property into newTask object */
-    
-    let updatedTask;
-
-    // Set the newTodoList with all the properties updated
-    setTodoList((prev) => [...prev, updatedTask]);
+    // Set the updated TodoList
+    setTodoList((prev) => [...prev, newTask]);
   }
 
-  const handleDelete = (idToDelete) => {
-    setTodoList((prev) => prev.filter(todo => todo.id !== idToDelete));
+  const handleDelete = (indexTodo) => {
+    setTodoList((prev) => prev.filter((_, index) => index !== indexTodo));
   };
 
   return (

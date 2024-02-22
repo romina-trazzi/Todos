@@ -8,10 +8,13 @@ ul {
   padding: 0;
 }
 
+.counter {
+  margin-bottom: 2rem;
+}
+
 .todoItem {
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-bottom: 2rem;
   border: 1px solid white;
   border-radius: 1rem;
@@ -21,13 +24,17 @@ ul {
   }
 }
 
-.bin_button_container {
+.bin_container {
+  display: flex;
+  justify-content: flex-end;
   width: 100%;
-
-}
-
-button {
-  width: min-content;
-  border: 0;
-  cursor: pointer;
+  
+  button {
+    border: 0;
+    cursor: pointer;
+    width: min-content;
+    & svg {
+      font-size: 1.1rem;
+    }
+  }
 }
