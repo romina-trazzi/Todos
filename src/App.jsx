@@ -9,12 +9,12 @@ function App() {
   
   const handleTaskChange = (newTask) => {
     
-    // Update the id value of the newTask before setting the list
+    /* Update the id value of the newTask before setting the list:
+
+    1. Find the maxId value into the current todoList
+    2. Update the id property into newTask object */
     
-    // Find madId into current todoList
     const maxId = Math.max(...todoList.map(task => task.id));
-  
-    // Update id property in the object newTask
     const updatedTask = { ...newTask, id: maxId + 1 };
 
     // Set the newTodoList with all the properties updated

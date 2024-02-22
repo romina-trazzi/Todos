@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import './FormTodos.css'
 
 function FormTodos({ onTaskChange }) {
   const [newTask, setNewTask] = useState({ id: "", titolo: "", descrizione: "" });
@@ -31,9 +32,11 @@ function FormTodos({ onTaskChange }) {
   }
 
   return (
-    <div>
+    <div className="form_Container">
       <h2>Crea un nuovo ToDo</h2>
-      <div className="formContainer">
+
+      <div className="form_wrapper">
+
         {/* Title input Field */}
         <div className="title">
           <label>Titolo</label>
@@ -59,9 +62,12 @@ function FormTodos({ onTaskChange }) {
         </div>
 
         {/* Submit Button */}
-        <button onClick={handleClick}>Inserisci</button>
+        <button onClick={handleClick}>
+          <span>+</span>Inserisci
+        </button>
       </div>
     </div>
+        
   );
 }
 
