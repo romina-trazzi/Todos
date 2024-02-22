@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import './App.css'
+import styles from './App.module.css'
 import FormTodos from './components/FormTodos.jsx';
 import TodoList from './components/TodoList.jsx';
-import DUMMY_TODO from './assets/DUMMY_TODO.js';
 
 function App() {
-  const [todoList, setTodoList] = useState(DUMMY_TODO);
+  const [todoList, setTodoList] = useState([{titolo: "", descrizione: ""}]);
   
   const handleTaskChange = (newTask) => {
     
@@ -14,24 +13,27 @@ function App() {
     1. Find the maxId value into the current todoList
     2. Update the id property into newTask object */
     
-    const maxId = Math.max(...todoList.map(task => task.id));
-    const updatedTask = { ...newTask, id: maxId + 1 };
+    let updatedTask;
 
     // Set the newTodoList with all the properties updated
     setTodoList((prev) => [...prev, updatedTask]);
   }
+
+  const handleDelete = (idToDelete) => {
+    setTodoList((prev) => prev.filter(todo => todo.id !== idToDelete));
+  };
 
   return (
     <>
       <header> ToDo List </header>
       <main>
 
-        <div className="general_container">
+        <div className={styles.general_container}>
           <FormTodos onTaskChange={handleTaskChange}/>
         </div>
 
-        <div className="todo_list_container">
-          <TodoList listOfTodo={todoList} count={todoList.length}/>
+        <div className={styles.todo_list_container}>
+          <TodoList listOfTodo={todoList} onDelete={handleDelete}/>
         </div>
 
       </main>

@@ -1,21 +1,27 @@
-import './TodoList.css'
+import styles from './TodoList.module.css'
 import { RiDeleteBin7Line } from "react-icons/ri";
 
-function TodoList({listOfTodo, count}) {
+function TodoList({listOfTodo, onDelete}) {
 
   return (
     
     <>
     <h2>Lista ToDo</h2>
-    <span>{`Element: ${count}`}</span>
+    <span>{`Element: ${listOfTodo.length}`}</span>
     
     <ul>
-      {listOfTodo.map((singleTodo, index) => 
-      <div key={index} className="todoItem">
-        <span><strong>{`ToDo ${singleTodo.id} `}</strong></span>
+      {listOfTodo.length === 0 ? <p>Nessun elemento</p> :
+
+      listOfTodo.map((singleTodo, index) => 
+      <div key={index} className={styles.todoItem}>
+        <span><strong>{`ToDo ${index+1} `}</strong></span>
         <span>{singleTodo.titolo}</span>
         <span>{singleTodo.descrizione}</span>
-        <span><RiDeleteBin7Line /></span>
+        <div className={styles.bin_button_container}>
+          <button onClick={()=> onDelete(index)}>
+            <RiDeleteBin7Line /> 
+          </button>
+        </div>
       </div>
       )}
     </ul>
