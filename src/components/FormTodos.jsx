@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import { RiAddCircleLine } from "react-icons/ri";
 import './FormTodos.css'
 
 function FormTodos({ onTaskChange }) {
@@ -62,9 +63,13 @@ function FormTodos({ onTaskChange }) {
         </div>
 
         {/* Submit Button */}
-        <button onClick={handleClick}>
-          <span>+</span>Inserisci
-        </button>
+        <div className="submit_data">
+          <button onClick={handleClick}>
+            <span><RiAddCircleLine />Inserisci</span>
+          </button>
+        </div>
+
+
       </div>
     </div>
         

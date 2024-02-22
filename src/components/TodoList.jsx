@@ -1,4 +1,5 @@
 import './TodoList.css'
+import { RiDeleteBin7Line } from "react-icons/ri";
 
 function TodoList({listOfTodo, count}) {
 
@@ -14,6 +15,7 @@ function TodoList({listOfTodo, count}) {
         <span><strong>{`ToDo ${singleTodo.id} `}</strong></span>
         <span>{singleTodo.titolo}</span>
         <span>{singleTodo.descrizione}</span>
+        <span><RiDeleteBin7Line /></span>
       </div>
       )}
     </ul>

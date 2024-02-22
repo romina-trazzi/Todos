@@ -3,6 +3,12 @@ ul {
   padding: 0;
 
 }
+
+h2 {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
 .todoItem {
   display: flex;
   flex-direction: column;
