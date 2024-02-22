@@ -1,15 +1,16 @@
+function TodoList({listOfTodo, count}) {
 
-function TodoList({listOfTodo, countToDo}) {
   return (
     
     <>
     <h2>Lista ToDo</h2>
-
+    <span>{`Element: ${count}`}</span>
+    
     <ul>
-      {listOfTodo.map((singleTodo) => 
-      <div key={singleTodo.id} className="todoItem">
-        <span><b>{`ToDo ${singleTodo.id} `}</b></span>
-        <span>{singleTodo.nome}</span>
+      {listOfTodo.map((singleTodo, index) => 
+      <div key={index} className="todoItem">
+        <span><strong>{`ToDo ${singleTodo.id} `}</strong></span>
+        <span>{singleTodo.titolo}</span>
         <span>{singleTodo.descrizione}</span>
       </div>
       )}
@@ -20,3 +21,5 @@ function TodoList({listOfTodo, countToDo}) {
 }
 
 export default TodoList
+
+

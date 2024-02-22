@@ -1,40 +1,44 @@
 import { useState } from 'react';
 import './App.css'
-import FormTodo from './components/FormTodo.jsx';
-import InsertButton from './components/InsertButton.jsx';
+import FormTodos from './components/FormTodos.jsx';
 import TodoList from './components/TodoList.jsx';
 import DUMMY_TODO from './assets/DUMMY_TODO.js';
 
-
 function App() {
   const [todoList, setTodoList] = useState(DUMMY_TODO);
-  const [newTask, setNewTask] = useState({id:"", nome: "", descrizione:""});
+  
+  const handleTaskChange = (newTask) => {
+    
+    // Update the id value of the newTask before setting the list
+    
+    // Find madId into current todoList
+    const maxId = Math.max(...todoList.map(task => task.id));
+  
+    // Update id property in the object newTask
+    const updatedTask = { ...newTask, id: maxId + 1 };
 
-  const handleAdd = (event, newTask) => {
-    event.preventDefault();
-    console.log("Ciao");
-    setNewTask(event.target.value);
-    setTodoList((prev) => prev, ...todoList);
+    // Set the newTodoList with all the properties updated
+    setTodoList((prev) => [...prev, updatedTask]);
   }
 
   return (
     <>
       <header> ToDo List </header>
       <main>
+
         <div className="general_container">
-          <FormTodo/>
-          <InsertButton onAdd={handleAdd}/>
+          <FormTodos onTaskChange={handleTaskChange}/>
         </div>
+
         <div className="todo_list_container">
-          <TodoList listOfTodo={todoList}/>
+          <TodoList listOfTodo={todoList} count={todoList.length}/>
         </div>
+
       </main>
       <footer>Made by Romina Trazzi ~ 2024 ~</footer>
     </>
   )
 
-
-    
 }
 
 export default App
