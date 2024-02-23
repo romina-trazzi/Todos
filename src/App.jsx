@@ -5,14 +5,28 @@ import TodoList from './components/TodoList/TodoList.jsx';
 
 function App() {
   const [todoList, setTodoList] = useState([]);
-  const [editElement, setEditElement] = useState({editTitle:"", editDescription:""});
+  const [editElement, setEditElement] = useState({editTitle:"", editDescription:"", index:""});
   const [isEditing, setIsEditing] = useState(false);
   
-  const handleTaskChange = (newTask) => {
+  const handleTaskChange = (task, action) => {
     
-    // Set the updated TodoList
-    setTodoList((prev) => [...prev, newTask]);
-    setIsEditing(false);
+    if (action === "create") {
+
+      // Set the updated TodoList
+      setTodoList((prev) => [...prev, task]);
+
+    } else if (action === "update") {
+
+      // Set edit task
+      setTodoList((prev) => {
+        const newTodoList = [...prev];
+        newTodoList[task.index] = {titolo: task.titolo, descrizione: task.descrizione};
+        
+        return newTodoList
+      })
+
+      setIsEditing(false);
+    }
   }
 
   const handleDelete = (indexTodo) => {
@@ -21,9 +35,11 @@ function App() {
 
   const handleEdit = (indexTodo) => {
 
-    // Get editable current values
-    const {titolo, descrizione} = todoList[indexTodo];
-    setEditElement({editTitle: titolo, editDescription: descrizione})
+    window.scrollTo(0, 0);
+
+    // Get editable current values (and adding index property)
+    const {titolo, descrizione} = todoList[indexTodo]
+    setEditElement({editTitle: titolo, editDescription: descrizione, index: indexTodo})
 
     // Change isEditingValue
     setIsEditing(true);

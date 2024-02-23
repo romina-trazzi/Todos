@@ -18,12 +18,13 @@ function TodoList({listOfTodo, onDelete, onEdit}) {
       <span>{singleTodo.titolo}</span>
       <span>{singleTodo.descrizione}</span>
 
-      {/* Delete button */}  
       <div className={styles.bin_container}>
+        {/* Delete button */}  
         <button onClick={() => onDelete(index)}>
           <RiDeleteBin7Line />
         </button>
-    
+        
+        {/* Edit button */} 
         <button onClick={() => onEdit(index)}>
           Modifica
         </button>

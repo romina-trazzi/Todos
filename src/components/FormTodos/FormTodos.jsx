@@ -1,9 +1,19 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { RiAddCircleLine } from "react-icons/ri";
 import styles from './FormTodos.module.css'
 
 function FormTodos({ onTaskChange, editElement, isEditing }) {
-  const [newTask, setNewTask] = useState({titolo: "", descrizione: ""});
+  
+  const [newTask, setNewTask] = useState({titolo: "", descrizione:""});
+
+  useEffect(() => { 
+    if (isEditing) {
+      setNewTask({titolo: editElement.editTitle, descrizione: editElement.editDescription})
+    } else {
+      setNewTask({titolo: "", descrizione: ""})
+    }
+  }, [isEditing]);
+  
     
   const handleElementChange = (event) => {
     const { name, value } = event.target;
@@ -13,14 +23,22 @@ function FormTodos({ onTaskChange, editElement, isEditing }) {
     }));
   }
 
-  const handleClick = () => {
+  const handleClick = (action) => {
+    
     if (newTask.titolo.trim() === '' || newTask.descrizione.trim() === '') {
-      alert("Assicurati di compilare tutti i campi!");
-      return; 
+        alert("Assicurati di compilare tutti i campi!");
+        return; 
     }
     
-    onTaskChange(newTask);
-    setNewTask({ titolo: "", descrizione: "" });
+    if (action === "create") {  
+      onTaskChange(newTask, "create");
+      setNewTask({ titolo: "", descrizione: "" });
+
+    } else if (action === "update") {
+      const updatedTask = {...newTask, index: editElement.index }
+      onTaskChange(updatedTask, "update");
+
+    }
   }
 
   return (
@@ -35,7 +53,7 @@ function FormTodos({ onTaskChange, editElement, isEditing }) {
           <input type="text" 
             placeholder="Inserisci il titolo del ToDo" 
             name="titolo" 
-            value={isEditing ? editElement.editTitle : newTask.titolo}
+            value={newTask.titolo}
             onChange={handleElementChange} 
             required 
           />
@@ -47,17 +65,25 @@ function FormTodos({ onTaskChange, editElement, isEditing }) {
           <textarea 
             placeholder="Inserisci la descrizione del ToDo"
             name="descrizione" 
-            value={isEditing ? editElement.editDescription : newTask.descrizione}
+            value={newTask.descrizione}
             onChange={handleElementChange} 
             required
           ></textarea>
         </div>
 
-        {/* Submit Button */}
+        {/* Create or Update Button */}
         <div className={styles.submit_data}>
-          <button onClick={handleClick}>
+          {isEditing ?
+          
+          <button onClick={() => handleClick("update")}>
+            <span><RiAddCircleLine />Salva</span>
+          </button> :
+
+          <button onClick={() => handleClick("create")}>
             <span><RiAddCircleLine />Inserisci</span>
           </button>
+          }
+
         </div>
 
       </div>

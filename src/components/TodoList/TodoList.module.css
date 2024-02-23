@@ -33,6 +33,7 @@ ul {
     border: 0;
     cursor: pointer;
     width: min-content;
+    padding-left: 0.5rem;
     & svg {
       font-size: 1.1rem;
     }
