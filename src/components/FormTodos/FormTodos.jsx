@@ -2,8 +2,8 @@ import {useState} from 'react';
 import { RiAddCircleLine } from "react-icons/ri";
 import styles from './FormTodos.module.css'
 
-function FormTodos({ onTaskChange }) {
-  const [newTask, setNewTask] = useState({ titolo: "", descrizione: "" });
+function FormTodos({ onTaskChange, editElement, isEditing }) {
+  const [newTask, setNewTask] = useState({titolo: "", descrizione: ""});
     
   const handleElementChange = (event) => {
     const { name, value } = event.target;
@@ -25,7 +25,7 @@ function FormTodos({ onTaskChange }) {
 
   return (
     <div className={styles.form_Container}>
-      <h2>Crea un nuovo ToDo</h2>
+      <h2>{isEditing ? 'Modifica ToDo' : 'Crea un nuovo ToDo'}</h2>
 
       <div className={styles.form_wrapper}>
 
@@ -35,7 +35,7 @@ function FormTodos({ onTaskChange }) {
           <input type="text" 
             placeholder="Inserisci il titolo del ToDo" 
             name="titolo" 
-            value={newTask.titolo}
+            value={isEditing ? editElement.editTitle : newTask.titolo}
             onChange={handleElementChange} 
             required 
           />
@@ -47,7 +47,7 @@ function FormTodos({ onTaskChange }) {
           <textarea 
             placeholder="Inserisci la descrizione del ToDo"
             name="descrizione" 
-            value={newTask.descrizione} 
+            value={isEditing ? editElement.editDescription : newTask.descrizione}
             onChange={handleElementChange} 
             required
           ></textarea>
@@ -59,9 +59,11 @@ function FormTodos({ onTaskChange }) {
             <span><RiAddCircleLine />Inserisci</span>
           </button>
         </div>
+
       </div>
     </div>
   );
 }
 
 export default FormTodos;
+

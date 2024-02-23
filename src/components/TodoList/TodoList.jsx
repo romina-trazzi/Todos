@@ -1,7 +1,7 @@
 import styles from './TodoList.module.css'
 import { RiDeleteBin7Line } from "react-icons/ri";
 
-function TodoList({listOfTodo, onDelete}) {
+function TodoList({listOfTodo, onDelete, onEdit}) {
 
   return (
     
@@ -22,6 +22,10 @@ function TodoList({listOfTodo, onDelete}) {
       <div className={styles.bin_container}>
         <button onClick={() => onDelete(index)}>
           <RiDeleteBin7Line />
+        </button>
+    
+        <button onClick={() => onEdit(index)}>
+          Modifica
         </button>
       </div>
 
