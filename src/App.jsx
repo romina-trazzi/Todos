@@ -19,10 +19,10 @@ function App() {
 
       // Set edit task
       setTodoList((prev) => {
-        const newTodoList = [...prev];
-        newTodoList[task.index] = {titolo: task.titolo, descrizione: task.descrizione};
+        const editedTodoList = [...prev];
+        editedTodoList[task.index] = {titolo: task.titolo, descrizione: task.descrizione};
         
-        return newTodoList
+        return editedTodoList
       })
 
       setIsEditing(false);
@@ -38,11 +38,27 @@ function App() {
     window.scrollTo(0, 0);
 
     // Get editable current values (and adding index property)
-    const {titolo, descrizione} = todoList[indexTodo]
-    setEditElement({editTitle: titolo, editDescription: descrizione, index: indexTodo})
+    const {titolo, descrizione} = todoList[indexTodo];
+    setEditElement({editTitle: titolo, editDescription: descrizione, index: indexTodo});
 
     // Change isEditingValue
     setIsEditing(true);
+  }
+
+  const handleComplete = (indexTodo) => {
+
+    // Get completed todo values
+    const completedTodo = todoList[indexTodo];
+   
+    // Set the updated TodoList
+    setTodoList((prev) => {
+      const markedTodoList = [...prev];
+      markedTodoList[indexTodo] = {titolo: completedTodo.titolo, descrizione: completedTodo.descrizione, completed: true};
+      
+      return markedTodoList
+    })
+
+
   }
 
   return (
@@ -55,7 +71,7 @@ function App() {
         </div>
 
         <div className={styles.todo_list_container}>
-          <TodoList listOfTodo={todoList} onDelete={handleDelete} onEdit={handleEdit}/>
+          <TodoList listOfTodo={todoList} onDelete={handleDelete} onEdit={handleEdit} onComplete={handleComplete}/>
         </div>
 
       </main>

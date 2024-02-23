@@ -2,42 +2,41 @@ import {useState, useEffect} from 'react';
 import { RiAddCircleLine } from "react-icons/ri";
 import styles from './FormTodos.module.css'
 
-function FormTodos({ onTaskChange, editElement, isEditing }) {
+function FormTodos({ onTaskChange, editElement, isEditing, completedElement }) {
   
-  const [newTask, setNewTask] = useState({titolo: "", descrizione:""});
+  const [task, setTask] = useState({titolo: "", descrizione:""});
 
   useEffect(() => { 
     if (isEditing) {
-      setNewTask({titolo: editElement.editTitle, descrizione: editElement.editDescription})
+      setTask({titolo: editElement.editTitle, descrizione: editElement.editDescription, completed: false})
     } else {
-      setNewTask({titolo: "", descrizione: ""})
+      setTask({titolo: "", descrizione: "", completed: false})
     }
   }, [isEditing]);
   
     
   const handleElementChange = (event) => {
     const { name, value } = event.target;
-    setNewTask((prev) => ({
+    setTask((prev) => ({
       ...prev,
       [name]: value,
     }));
   }
 
-  const handleClick = (action) => {
+  const handleInsert = (action) => {
     
-    if (newTask.titolo.trim() === '' || newTask.descrizione.trim() === '') {
+    if (task.titolo.trim() === '' || task.descrizione.trim() === '') {
         alert("Assicurati di compilare tutti i campi!");
         return; 
     }
     
     if (action === "create") {  
-      onTaskChange(newTask, "create");
-      setNewTask({ titolo: "", descrizione: "" });
+      onTaskChange(task, "create");
+      setTask({ titolo: "", descrizione: "", completed: false });
 
     } else if (action === "update") {
-      const updatedTask = {...newTask, index: editElement.index }
+      const updatedTask = {...task, index: editElement.index }
       onTaskChange(updatedTask, "update");
-
     }
   }
 
@@ -53,7 +52,7 @@ function FormTodos({ onTaskChange, editElement, isEditing }) {
           <input type="text" 
             placeholder="Inserisci il titolo del ToDo" 
             name="titolo" 
-            value={newTask.titolo}
+            value={task.titolo}
             onChange={handleElementChange} 
             required 
           />
@@ -65,7 +64,7 @@ function FormTodos({ onTaskChange, editElement, isEditing }) {
           <textarea 
             placeholder="Inserisci la descrizione del ToDo"
             name="descrizione" 
-            value={newTask.descrizione}
+            value={task.descrizione}
             onChange={handleElementChange} 
             required
           ></textarea>
@@ -75,11 +74,11 @@ function FormTodos({ onTaskChange, editElement, isEditing }) {
         <div className={styles.submit_data}>
           {isEditing ?
           
-          <button onClick={() => handleClick("update")}>
+          <button onClick={() => handleInsert("update")}>
             <span><RiAddCircleLine />Salva</span>
           </button> :
 
-          <button onClick={() => handleClick("create")}>
+          <button onClick={() => handleInsert("create")}>
             <span><RiAddCircleLine />Inserisci</span>
           </button>
           }
