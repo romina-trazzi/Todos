@@ -46,19 +46,12 @@ function App() {
   }
 
   const handleComplete = (indexTodo) => {
-
-    // Get completed todo values
-    const completedTodo = todoList[indexTodo];
-   
-    // Set the updated TodoList
-    setTodoList((prev) => {
-      const markedTodoList = [...prev];
-      markedTodoList[indexTodo] = {titolo: completedTodo.titolo, descrizione: completedTodo.descrizione, completed: true};
-      
-      return markedTodoList
+    
+    setTodoList(prev => {
+      const updatedTodoList = [...prev];
+      updatedTodoList[indexTodo] = {...updatedTodoList[indexTodo], completed: !updatedTodoList[indexTodo].completed};
+      return updatedTodoList;
     })
-
-
   }
 
   return (
