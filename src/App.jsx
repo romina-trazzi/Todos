@@ -48,7 +48,10 @@ function App() {
   const handleComplete = (indexTodo) => {
     
     setTodoList(prev => {
+      // Copy of the previous array 
       const updatedTodoList = [...prev];
+
+      // Modify and toggle the "complete" property value (of the selected object)
       updatedTodoList[indexTodo] = {...updatedTodoList[indexTodo], completed: !updatedTodoList[indexTodo].completed};
       return updatedTodoList;
     })

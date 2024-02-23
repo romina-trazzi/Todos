@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import { RiAddCircleLine } from "react-icons/ri";
 import styles from './FormTodos.module.css'
+import ButtonAction from "../ButtonAction/ButtonAction";
 
 function FormTodos({ onTaskChange, editElement, isEditing, completedElement }) {
   
@@ -73,14 +74,10 @@ function FormTodos({ onTaskChange, editElement, isEditing, completedElement }) {
         {/* Create or Update Button */}
         <div className={styles.submit_data}>
           {isEditing ?
-          
-          <button onClick={() => handleInsert("update")}>
-            <span><RiAddCircleLine />Salva</span>
-          </button> :
 
-          <button onClick={() => handleInsert("create")}>
-            <span><RiAddCircleLine />Inserisci</span>
-          </button>
+          <ButtonAction onClickAction={() => handleInsert("update")}> <span><RiAddCircleLine />Salva</span> </ButtonAction>
+          :
+          <ButtonAction onClickAction={() => handleInsert("create")}> <span><RiAddCircleLine />Inserisci</span> </ButtonAction>
           }
 
         </div>
