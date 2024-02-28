@@ -1,12 +1,11 @@
-
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { FaPencil } from "react-icons/fa6";
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import { TbCircleLetterP } from "react-icons/tb";
 import ButtonAction from "../ButtonAction/ButtonAction";
-import styles from "./SingleTodo.module.css";
+import styles from "./Todos.module.css";
 
-function SingleTodo({listOfTodo, onDelete, onEdit, onComplete, onPriority}) {
+function Todos({listOfTodo, onDelete, onEdit, onComplete, onPriority}) {
   return (
     <>
     {listOfTodo.length === 0 ? <p>Nessun elemento</p> : listOfTodo.map((singleTodo, index) => (
@@ -29,7 +28,11 @@ function SingleTodo({listOfTodo, onDelete, onEdit, onComplete, onPriority}) {
         <ButtonAction onClickAction={() => onComplete(index)}> <MdOutlineVerifiedUser /> </ButtonAction>
 
         {/* Mark with priority */}
-        <ButtonAction onClickAction={() => onPriority(index)}> <TbCircleLetterP /> </ButtonAction>
+        <ButtonAction onClickAction={() => onPriority(singleTodo)} > 
+          
+          {/* Render correct style if priority is true */}
+          <TbCircleLetterP className={singleTodo.titolo ? styles.red : ''}/> 
+        </ButtonAction>
         
       </div>
 
@@ -42,4 +45,4 @@ function SingleTodo({listOfTodo, onDelete, onEdit, onComplete, onPriority}) {
   )
 }
 
-export default SingleTodo
+export default Todos

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './App.module.css'
 import FormTodos from './components/FormTodos/FormTodos.jsx';
-import SingleTodo from './components/SingleTodo/SingleTodo.jsx';
+import Todos from './components/Todos/Todos.jsx';
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -64,21 +64,25 @@ function App() {
     })
   }
 
-  const handlePriority = (indexTodo) => {
+  const handlePriority = (task) => {
      
     setTodoListPriority(prev => {
-      // Check if the task is already in the priority list
-      const indexOfTodo = prev.indexOf(indexTodo);
-        
-      // If not (alias === -1), add it to the list
-      if (indexOfTodo === -1) {  
-        return [...prev, indexTodo];
-      // If it's already in the list, remove it
-      } else {
-        return prev.filter(itemIndex => itemIndex !== indexTodo);
-      }
+    
+    // Check if the task object is already in the priority list (result: true or false)
+    const isAlreadyInPriorityList = prev.includes(task);
+    
+    // If FALSE (so the element is not in the list), add it
+    if (!isAlreadyInPriorityList) {  
+      return [...prev, task];
+    // If TRUE (so, element it's already in the list), remove it
+    } else {
+      return [...prev.filter(item => !(item.titolo === task.titolo && item.descrizione === task.descrizione))];
+    }
+
     });
   }
+
+
 
   // GESTIRE IL SORTING
   const handleSorting = () => {
@@ -106,7 +110,7 @@ function App() {
           <h2>Lista ToDo</h2>
           <span className={styles.counter}> {`Element: ${todoList.length}`} </span>
           <ul>
-            <SingleTodo listOfTodo={todoList} onDelete={handleDelete} onEdit={handleEdit} onComplete={handleComplete} onPriority={handlePriority}/>
+            <Todos listOfTodo={todoList} onDelete={handleDelete} onEdit={handleEdit} onComplete={handleComplete} onPriority={handlePriority}/>
           </ul>
         </div>
 
