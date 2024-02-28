@@ -9,6 +9,8 @@ function Todos({listOfTodo, onDelete, onEdit, onComplete, onPriority}) {
   return (
     <>
     {listOfTodo.length === 0 ? <p>Nessun elemento</p> : listOfTodo.map((singleTodo, index) => (
+    
+    
     <div key={index} className={`${styles.todoItem} ${singleTodo.completed ? styles.completed : ''}`}>
       
       {/* Rendering TodoList*/}

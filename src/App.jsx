@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from './App.module.css'
 import FormTodos from './components/FormTodos/FormTodos.jsx';
 import Todos from './components/Todos/Todos.jsx';
+import ButtonAction from './components/ButtonAction/ButtonAction.jsx';
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -37,7 +38,7 @@ function App() {
     setTodoList((prev) => prev.filter((_, index) => index !== indexTodo));
 
     // Remove from priority list if deleted
-    setTodoListPriority(prev => prev.filter(index => index !== indexTodo));
+    setTodoListPriority(prev => prev.filter((_, index) => index !== indexTodo));
   };
 
   const handleEdit = (indexTodo) => {
@@ -71,31 +72,38 @@ function App() {
     // Check if the task object is already in the priority list (result: true or false)
     const isAlreadyInPriorityList = prev.includes(task);
     
-    // If FALSE (so the element is not in the list), add it
-    if (!isAlreadyInPriorityList) {  
-      return [...prev, task];
-    // If TRUE (so, element it's already in the list), remove it
+    // If FALSE (so, the element is not in the list), add it
+    if (!isAlreadyInPriorityList) {
+
+      // Add "priority: high" property to the task
+      const priorityTask = { ...task, priority: "high" };
+      return [...prev, priorityTask];
+     
+    // If TRUE (so, the element it's already in the list), remove it
     } else {
-      return [...prev.filter(item => !(item.titolo === task.titolo && item.descrizione === task.descrizione))];
+      return prev.filter((item) => item.titolo = task.titolo && item.descrizione === task.descrizione);
     }
 
     });
+
+
   }
 
+  const handleSorting = (priorityList) => {
+    
+    setTodoList((prev) => {
+    
+    /* Filtra gli elementi di prev (alias todoList): 
+     - per ogni elemento di prev: se il singolo prevItem non ha titolo e descrizione uguali a quelli di un item di priorityList
+     - allora aggiungi il prevItem nella lista filtrata
+    */
+    const noPriorityList = prev.filter(prevItem => !priorityList.some(priorityItem => priorityItem.titolo === prevItem.titolo && priorityItem.descrizione === prevItem.descrizione));
 
+    const mergedList = [...priorityList, ...noPriorityList];
 
-  // GESTIRE IL SORTING
-  const handleSorting = () => {
+    return mergedList;
+  })};
 
-    // Sort list
-    const sortedTodoList = todoList.sort((a, b) => {
-    const priorityA = todoListPriority.includes(todoList.indexOf(a));
-    const priorityB = todoListPriority.includes(todoList.indexOf(b));
-    if (priorityA && !priorityB) return -1;
-    if (!priorityA && priorityB) return 1;
-    return 0;
-    });
-  }
 
   return (
     <>
@@ -109,6 +117,13 @@ function App() {
         <div className={styles.todo_list_container}>
           <h2>Lista ToDo</h2>
           <span className={styles.counter}> {`Element: ${todoList.length}`} </span>
+
+          {/* Conditional Sorting Button */}
+          {todoList.length > 0 && 
+          <span className={styles.sorting}>
+            <ButtonAction onClickAction={() => handleSorting(todoListPriority)}> Sorting Tasks by priority </ButtonAction>
+          </span>}
+         
           <ul>
             <Todos listOfTodo={todoList} onDelete={handleDelete} onEdit={handleEdit} onComplete={handleComplete} onPriority={handlePriority}/>
           </ul>

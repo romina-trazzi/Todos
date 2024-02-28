@@ -48,6 +48,16 @@ ul {
   margin-bottom: 2rem;
 }
 
+.sorting {
+  margin-bottom: 3rem;
+}
+
+.sorting button {
+  padding: 1rem;
+  border: 0;
+  cursor: pointer;
+  border-radius: 10%;
+}
 
 footer {
   margin-top: 3rem;
