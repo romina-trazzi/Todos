@@ -2,10 +2,11 @@
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { FaPencil } from "react-icons/fa6";
 import { MdOutlineVerifiedUser } from "react-icons/md";
+import { TbCircleLetterP } from "react-icons/tb";
 import ButtonAction from "../ButtonAction/ButtonAction";
 import styles from '../TodoList/TodoList.module.css'
 
-function SingleTodo({listOfTodo, onDelete, onEdit, onComplete}) {
+function SingleTodo({listOfTodo, onDelete, onEdit, onComplete, onPriority}) {
   return (
     <>
     {listOfTodo.length === 0 ? <p>Nessun elemento</p> : listOfTodo.map((singleTodo, index) => (
@@ -26,6 +27,9 @@ function SingleTodo({listOfTodo, onDelete, onEdit, onComplete}) {
         
         {/* Completed button */}
         <ButtonAction onClickAction={() => onComplete(index)}> <MdOutlineVerifiedUser /> </ButtonAction>
+
+        {/* Mark with priority */}
+        <ButtonAction onClickAction={() => onPriority(index)}> <TbCircleLetterP /> </ButtonAction>
         
       </div>
 

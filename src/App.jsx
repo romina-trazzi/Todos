@@ -7,6 +7,7 @@ function App() {
   const [todoList, setTodoList] = useState([]);
   const [editElement, setEditElement] = useState({editTitle:"", editDescription:"", index:""});
   const [isEditing, setIsEditing] = useState(false);
+  const [todoListPriority, setTodoListPriority] = useState([]);
   
   const handleTaskChange = (task, action) => {
     
@@ -15,8 +16,11 @@ function App() {
       // Set the updated TodoList
       setTodoList((prev) => [...prev, task]);
 
-    } else if (action === "update") {
-
+    } 
+    
+    
+    if (action === "update") {
+      
       // Set edit task
       setTodoList((prev) => {
         const editedTodoList = [...prev];
@@ -31,6 +35,9 @@ function App() {
 
   const handleDelete = (indexTodo) => {
     setTodoList((prev) => prev.filter((_, index) => index !== indexTodo));
+
+    // Remove from priority list if deleted
+    setTodoListPriority(prev => prev.filter(index => index !== indexTodo));
   };
 
   const handleEdit = (indexTodo) => {
@@ -57,6 +64,36 @@ function App() {
     })
   }
 
+ 
+  const handlePriority = (indexTodo) => {
+     
+    setTodoListPriority(prev => {
+      // Check if the task is already in the priority list
+      const indexOfTodo = prev.indexOf(indexTodo);
+        
+      // If not (alias === -1), add it to the list
+      if (indexOfTodo === -1) {  
+        return [...prev, indexTodo];
+      // If it's already in the list, remove it
+      } else {
+        return prev.filter(itemIndex => itemIndex !== indexTodo);
+      }
+    });
+  }
+
+  // GESTIRE IL SORTING
+  const handleSorting = () => {
+
+    // Sort list
+    const sortedTodoList = todoList.sort((a, b) => {
+    const priorityA = todoListPriority.includes(todoList.indexOf(a));
+    const priorityB = todoListPriority.includes(todoList.indexOf(b));
+    if (priorityA && !priorityB) return -1;
+    if (!priorityA && priorityB) return 1;
+    return 0;
+    });
+  }
+
   return (
     <>
       <header> ToDo List </header>
@@ -67,7 +104,7 @@ function App() {
         </div>
 
         <div className={styles.todo_list_container}>
-          <TodoList listOfTodo={todoList} onDelete={handleDelete} onEdit={handleEdit} onComplete={handleComplete}/>
+          <TodoList listOfTodo={todoList} onDelete={handleDelete} onEdit={handleEdit} onComplete={handleComplete} onPriority={handlePriority}/>
         </div>
 
       </main>

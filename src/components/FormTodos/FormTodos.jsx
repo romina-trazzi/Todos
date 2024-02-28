@@ -3,7 +3,7 @@ import { RiAddCircleLine } from "react-icons/ri";
 import styles from './FormTodos.module.css'
 import ButtonAction from "../ButtonAction/ButtonAction";
 
-function FormTodos({ onTaskChange, editElement, isEditing, completedElement }) {
+function FormTodos({ onTaskChange, editElement, isEditing }) {
   
   const [task, setTask] = useState({titolo: "", descrizione:""});
 
@@ -26,9 +26,10 @@ function FormTodos({ onTaskChange, editElement, isEditing, completedElement }) {
 
   const handleInsert = (action) => {
     
+    // NOTE: if a string contains only white spaces, after applying trim(), it becomes an empty string. 
     if (task.titolo.trim() === '' || task.descrizione.trim() === '') {
-        alert("Assicurati di compilare tutti i campi!");
-        return; 
+      alert("Assicurati di compilare tutti i campi!");
+      return; 
     }
     
     if (action === "create") {  

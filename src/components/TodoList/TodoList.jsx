@@ -3,7 +3,7 @@ import SingleTodo from '../SingleTodo/SingleTodo'
 
 
 
-function TodoList({listOfTodo, onDelete, onEdit, onComplete}) {
+function TodoList({listOfTodo, onDelete, onEdit, onComplete, onPriority}) {
 
   return (
     
@@ -12,7 +12,7 @@ function TodoList({listOfTodo, onDelete, onEdit, onComplete}) {
     <span className={styles.counter}> {`Element: ${listOfTodo.length}`} </span>
     
     <ul>
-     <SingleTodo listOfTodo={listOfTodo} onDelete={onDelete} onEdit={onEdit} onComplete={onComplete}/>
+     <SingleTodo listOfTodo={listOfTodo} onDelete={onDelete} onEdit={onEdit} onComplete={onComplete} onPriority={onPriority}/>
     </ul>
     
     </>
