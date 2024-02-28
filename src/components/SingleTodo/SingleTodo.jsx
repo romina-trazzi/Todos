@@ -4,7 +4,7 @@ import { FaPencil } from "react-icons/fa6";
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import { TbCircleLetterP } from "react-icons/tb";
 import ButtonAction from "../ButtonAction/ButtonAction";
-import styles from '../TodoList/TodoList.module.css'
+import styles from "./SingleTodo.module.css";
 
 function SingleTodo({listOfTodo, onDelete, onEdit, onComplete, onPriority}) {
   return (

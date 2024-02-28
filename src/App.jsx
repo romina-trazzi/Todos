@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './App.module.css'
 import FormTodos from './components/FormTodos/FormTodos.jsx';
-import TodoList from './components/TodoList/TodoList.jsx';
+import SingleTodo from './components/SingleTodo/SingleTodo.jsx';
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -64,7 +64,6 @@ function App() {
     })
   }
 
- 
   const handlePriority = (indexTodo) => {
      
     setTodoListPriority(prev => {
@@ -104,7 +103,11 @@ function App() {
         </div>
 
         <div className={styles.todo_list_container}>
-          <TodoList listOfTodo={todoList} onDelete={handleDelete} onEdit={handleEdit} onComplete={handleComplete} onPriority={handlePriority}/>
+          <h2>Lista ToDo</h2>
+          <span className={styles.counter}> {`Element: ${todoList.length}`} </span>
+          <ul>
+            <SingleTodo listOfTodo={todoList} onDelete={handleDelete} onEdit={handleEdit} onComplete={handleComplete} onPriority={handlePriority}/>
+          </ul>
         </div>
 
       </main>

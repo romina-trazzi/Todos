@@ -1,17 +1,3 @@
-h2 {
-  text-align: left;
-  margin-bottom: 2rem;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.counter {
-  margin-bottom: 2rem;
-}
-
 .todoItem {
   display: flex;
   flex-direction: column;

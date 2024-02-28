@@ -34,6 +34,23 @@ main {
   margin-top: 3rem;
 }
 
+h2 {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.counter {
+  margin-bottom: 2rem;
+}
+
+
 footer {
   margin-top: 3rem;
 }
+
+
