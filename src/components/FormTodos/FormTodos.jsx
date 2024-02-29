@@ -5,7 +5,7 @@ import ButtonAction from "../ButtonAction/ButtonAction";
 
 function FormTodos({ onTaskChange, editElement, isEditing }) {
   
-  const [task, setTask] = useState({titolo: "", descrizione:""});
+  const [task, setTask] = useState({titolo: "", descrizione:"", completed: false});
 
   useEffect(() => { 
     if (isEditing) {

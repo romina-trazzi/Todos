@@ -5,7 +5,7 @@ import { TbCircleLetterP } from "react-icons/tb";
 import ButtonAction from "../ButtonAction/ButtonAction";
 import styles from "./Todos.module.css";
 
-function Todos({listOfTodo, onDelete, onEdit, onComplete, onPriority}) {
+function Todos({listOfTodo, todoListPriority, onDelete, onEdit, onComplete, onPriority}) {
   return (
     <>
     {listOfTodo.length === 0 ? <p>Nessun elemento</p> : listOfTodo.map((singleTodo, index) => (
@@ -33,7 +33,7 @@ function Todos({listOfTodo, onDelete, onEdit, onComplete, onPriority}) {
         <ButtonAction onClickAction={() => onPriority(singleTodo)} > 
           
           {/* Render correct style if priority is true */}
-          <TbCircleLetterP className={singleTodo.titolo ? styles.red : ''}/> 
+          <TbCircleLetterP className={ todoListPriority ? styles.red : ''}/> 
         </ButtonAction>
         
       </div>
