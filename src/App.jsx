@@ -85,8 +85,6 @@ function App() {
     }
 
     });
-
-
   }
 
   const handleSorting = (priorityList) => {
