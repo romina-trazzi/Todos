@@ -33,7 +33,7 @@ function Todos({listOfTodo, todoListPriority, onDelete, onEdit, onComplete, onPr
         <ButtonAction onClickAction={() => onPriority(singleTodo)} > 
           
           {/* Render correct style if priority is true */}
-          <TbCircleLetterP className={ todoListPriority ? styles.red : ''}/> 
+          <TbCircleLetterP className={singleTodo.priority === "high" ? styles.red : ''}/> 
         </ButtonAction>
         
       </div>
